@@ -125,7 +125,7 @@ You can add multiple `fp-do-` classes; they will execute sequentially.
 ### Developed By: [@ramtinq](https://github.com/ramtinq)
 
 ## License
-LGPL
+GPLv3
 
 ## Contact
 
