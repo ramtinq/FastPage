@@ -12,16 +12,15 @@ FastPage is a tool to simply load  your website's links via AJAX in a very simpl
 <link rel="stylesheet" href="/path/to/FastPage.css">
 ```
 
-2. Add FastPage.js script to before the end of the ```<body>``` element:
+2. Add FastPage.js script to the end of the ```<body>``` element:
 ```
-</body>
 <script src="/path/to/FastPage.js"></script>
+</body>
 ```
 3. (optional) if you also want easy image compression support, add these two scripts before FastPage.js:
 ```
 <script src="/path/to/heic2any.min.js"></script>
 <script src="/path/to/image-compressor.min.js"></script>
-<script src="/path/to/FastPage.js"></script>
 ```
 
 ## Usage
