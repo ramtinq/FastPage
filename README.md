@@ -1,97 +1,126 @@
-# FastPage - Simple AJAX Page Loads & Form Submissions
+# FastPage – Simple AJAX Page Loads & Form Submissions
 
 ## Introduction
 
-FastPage is a tool to simply load  your website's links via AJAX in a very simple way, submitting your html forms via AJAX, plus image compression for file inputs!
+FastPage is a lightweight tool that enables simple AJAX-based page loading and form submissions — with optional image compression for file inputs.
 
 ## Setup
 
-1. Add FastPage.css stylesheet to your document's ```<head>```:
+1. Add the FastPage CSS stylesheet to your document’s `<head>`:
 
-```
+```html
 <link rel="stylesheet" href="/path/to/FastPage.css">
-```
+````
 
-2. Add FastPage.js script to the end of the ```<body>``` element:
-```
+2. Add the FastPage JavaScript file to the end of the `<body>` element:
+
+```html
 <script src="/path/to/FastPage.js"></script>
 </body>
 ```
-3. (optional) if you also want easy image compression support, add these two scripts before FastPage.js:
-```
+
+3. *(Optional)* If you also want easy image compression support, include these two scripts **before** `FastPage.js`:
+
+```html
 <script src="/path/to/heic2any.min.js"></script>
 <script src="/path/to/image-compressor.min.js"></script>
 ```
 
 ## Usage
 
-### "fp-link"
-Add the "fp-link" class to any link to make it prevent it's default behavior and load it's href via FastPage.
+### `fp-link`
 
-Example: suppose you want to load an html into the element with `id="content"` in your document via AJAX using FastPage:
-```
+Add the `fp-link` class to any link to make it load its `href` via FastPage instead of performing the default page reload.
+
+Example: suppose you want to load a piece of HTML into an element with `id="content"` via AJAX using FastPage:
+
+```html
 <a class="fp-link" href="/products">View Products</a>
 <a class="fp-link" href="/services">View Services</a>
-...
+
 <div id="content">Nothing loaded yet!</div>
 ```
-In your backend, you need to return a json containing id(s) of the *to be loaded into* elements as key(s) and the correspounding html as the value(s). Something like this for the example above:
 
-```
+Your backend should return JSON containing the IDs of the elements to update as keys, and their corresponding HTML as values. For example:
+
+```json
 {
-    'body':
-    {
-        'content': '<div>Product 1</div><div>Product 2</div><div>Product 3</div>'
-    }
+  "body": {
+    "content": "<div>Product 1</div><div>Product 2</div><div>Product 3</div>"
+  }
 }
 ```
 
-This will put the `<div>Product 1</div><div>Product 2</div><div>Product 3</div>` html into the element having `id="content"`.
+This will replace the content of the element with `id="content"` with the returned HTML.
 
-You can also load other "fp-link"s into the element, as soon as they have the "fp-link" class, FastPage will take care of the event handling for them:
-```
+FastPage automatically handles new `fp-link` elements added dynamically. For example:
+
+```json
 {
-    'body':
-    {
-        'content': '<div>Product 1</div><div>Product 2</div><div>Product 3</div><a class=\"fp-link\" href=\"/products/archived\">Show Archived Products</a>'
-    }
+  "body": {
+    "content": "<div>Product 1</div><div>Product 2</div><div>Product 3</div><a class='fp-link' href='/products/archived'>Show Archived Products</a>"
+  }
 }
 ```
 
-Now the *Show Archived Products* link is added to the *content div* too, and this is a functional "fp-link", which again loads its href via FastPage when click!
+Now the *Show Archived Products* link will also work as a dynamic `fp-link`, loading its `href` via FastPage when clicked.
 
-### "fp-nopush"
-Add "fp-nopush" to an fp-link making it load without pushing it's href to the history, and keeping window's url unchanged.
+---
 
-### "fp-form"
-Add "fp-form" class to a `form` element to make it submit via FastPage. If the form has file input for photos which need to be compressed before uploading, add "fp-img-comp" to each file input element's class names.
+### `fp-nopush`
 
-```
+Add `fp-nopush` to an `fp-link` to make it load **without updating the browser’s URL or history**.
+
+---
+
+### `fp-form`
+
+Add the `fp-form` class to a `<form>` element to make it submit via FastPage.
+If the form includes file inputs that should be compressed before uploading, add `fp-img-comp` to each relevant file input.
+
+```html
 <form class="fp-form" action="" method="POST" enctype="multipart/form-data">
 ```
 
-### "fp-img-comp"
-Add fp-img-comp to file inputs considered to accept image files in an "fp-form" to easily compress them automatically before the form submission (onchange).
+---
 
-```
+### `fp-img-comp`
+
+Add `fp-img-comp` to file inputs in an `fp-form` to automatically compress selected images before form submission.
+
+```html
 <form class="fp-form" action="" method="POST" enctype="multipart/form-data">
-    <input type="file" class="fp-img-comp">
-    ...
+  <input type="file" class="fp-img-comp">
 </form>
 ```
 
-### "fp-img-then-"
-Adding "fp-img-then-someFunction" to an "fp-img-comp" input, will run the "someFunction" **AFTER** the image's compression is finished, passing the compression result's object url to it.
+---
 
-### "fp-first-"
-Add "fp-first-someFunction" class to an fp-link/fp-form to run someFunction()
-**BEFORE** the link/form starts to load.
+### `fp-img-then-`
 
-### "fp-then-"
-Add "fp-then-someFunction" class to an fp-link/fp-form to run someFunction() **AFTER** the link/form loads completely & inserts all it's new elements. You can add multiple "fp-then-" classes and they will be run in order.
+Add `fp-img-then-someFunction` to an `fp-img-comp` input to run `someFunction()` **after** image compression completes, passing the resulting object URL as a parameter.
 
-### "fp fp-do-"
-Add fp with "fp-do-someFunction" class to an element to run "someFunction" as soon as the element shows up, wheter on first window.load or when the element is loaded into the document via FastPage. You can add multiple "fp-do-" classes and they will run in order.   
+---
+
+### `fp-first-`
+
+Add `fp-first-someFunction` to an `fp-link` or `fp-form` to run `someFunction()` **before** the link or form starts loading.
+
+---
+
+### `fp-then-`
+
+Add `fp-then-someFunction` to an `fp-link` or `fp-form` to run `someFunction()` **after** the load completes and all new elements are inserted.
+You can add multiple `fp-then-` classes — they will run in order.
+
+---
+
+### `fp fp-do-`
+
+Add `fp` and `fp-do-someFunction` classes to an element to run `someFunction()` as soon as the element becomes visible — either on the initial page load or when dynamically inserted via FastPage.
+You can add multiple `fp-do-` classes; they will execute sequentially.
+
+---
 
 ### Developed By: [@ramtinq](https://github.com/ramtinq)
 
