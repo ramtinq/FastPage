@@ -1,15 +1,15 @@
 /**
- * FastPage 0.7.0
+ * FastPage 0.7.1
  * Simple & Fast AJAX page loads & Form Submissions + Simple Image Compression using external libraries.
  * https://github.com/ramtinq/fastpage
  *
- * Copyright 2021-2022 Ramtin Didab
+ * Copyright 2021-2025 Ramtin Didab
  *
  * Released under the LGPL License
  *
  * Released on: April 16, 2022
  * 
- * Last updated on: August 25, 2022
+ * Last updated on: October 20, 2025
  */
 
 /**
