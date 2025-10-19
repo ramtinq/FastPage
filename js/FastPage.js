@@ -546,7 +546,7 @@ function progressMove(prog) {
 }
 
 function getHrefPlusForm(base_href, form_el) {
-    var inputs = the_form.getElementsByTagName('input');
+    var inputs = form_el.getElementsByTagName('input');
     if(! base_href.includes('?') ) {
         base_href += '?';
     }
