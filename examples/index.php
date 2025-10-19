@@ -2,8 +2,8 @@
 <html>
 <title>Fast Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/fastpage/css/w3.css">
-<link rel="stylesheet" href="/fastpage/css/FastPage.css">
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="../css/FastPage.css">
 <body>
     
 <div id="status" class="w3-padding">Test Me!</div>
@@ -15,7 +15,7 @@
         this also passes the parent element containing ONLY NEWLY ADDED ELEMENTS 
         to the functionName function. This is helpful when it's needed 
         to run a function only on the newly added elements, 
-        like attaching event handlers.
+        like attaching event handlers (avoding double attachment of event handlers)
     -->
     <a href="#" class="fp fp-link fp-then-doSomething">hello</a>
     <a href="#" class="fp fp-link fp-then-doSomething">world</a>

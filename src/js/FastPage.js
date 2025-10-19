@@ -78,7 +78,7 @@
  * result's object url to it.
  */
 
- function fpUpdateLinks(el = document) {
+function fpUpdateLinks(el = document) {
     var fpLinks = el.getElementsByClassName('fp-link');
     for(var i=0; i<fpLinks.length; i++) {
         fpLink(fpLinks[i]);
